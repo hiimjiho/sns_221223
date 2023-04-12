@@ -6,6 +6,11 @@
 	<input type="text" class="form-control col-5" id="loginId">
 	<button type="submit" class="btn btn-info ml-3" id="duplicationBtn">중복확인</button>
 </div>
+	<div>
+		<small id="duplicatedId" class="text-danger d-none">아이디가 중복되었습니다.</small>
+		<small id="lengthCheckId" class="text-danger d-none">아이디가 4자 미만입니다.</small>
+		<small id="successId" class="text-success d-none">사용 가능한 아이디입니다.</small>
+	</div>
 
 <div class="form-group">
 	<span>비밀번호</span>
@@ -31,7 +36,32 @@
 <script>
 	$(document).ready(function(){
 		$("#duplicationBtn").on("click", function(){
-			alert("ㅎㅇ");
+			let loginId = $("#loginId").val().trim();
+			
+			$("#duplicatedId").addClass("d-none");
+			$("#lengthCheckId").addClass("d-none");
+			$("#successId").addClass("d-none");
+			
+			if(loginId.length < 4){
+				$("#lengthCheckId").removeClass("d-none");
+				return;
+			}
+			
+			$.ajax({
+				// request
+				url:"/user/is_duplicated_id"
+				, data:{"loginId":loginId}
+			
+				// response
+				, success:function(data){
+					if(data.result){
+						$("#duplicatedId").removeClass("d-none");
+					}else{
+						$("#successId").removeClass("d-none");
+					}
+				}
+			});
+			
 		});
 	});
 </script>
