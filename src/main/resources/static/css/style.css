@@ -1,0 +1,6 @@
+@charset "UTF-8";
+#wrap{height:1000px;
+min-width:500px;
+max-width:700px;}
+
+#signInBtn{margin-left:100px;}
