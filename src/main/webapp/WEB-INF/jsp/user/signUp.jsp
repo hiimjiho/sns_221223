@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<h2>회원 가입</h2>
-<span>ID</span>
+<h3>회원 가입</h3>
+
+<form id="signUpForm" method="post" action="/user/sign_up">
 <div class="form-group d-flex">
-	<input type="text" class="form-control col-5" id="loginId">
-	<button type="submit" class="btn btn-info ml-3" id="duplicationBtn">중복확인</button>
+	<input type="text" class="form-control col-5" id="loginId" placeholder="아이디를 입력하세요.">
+	<button type="submit" class="btn btn-info ml-2" id="duplicationBtn">중복확인</button>
 </div>
 	<div>
 		<small id="duplicatedId" class="text-danger d-none">아이디가 중복되었습니다.</small>
@@ -13,25 +14,22 @@
 	</div>
 
 <div class="form-group">
-	<span>비밀번호</span>
-	<input type="password" class="form-control col-5" id="password">
+	<input type="password" class="form-control col-5" id="password" placeholder="비밀번호를 입력하세요.">
 </div>
 
 <div class="form-group">
-	<span>비밀번호 확인</span>
-	<input type="password" class="form-control col-5" id="password">
+	<input type="password" class="form-control col-5" id="confirmPassword" placeholder="비밀번호를 입력하세요.">
 </div>
 
 <div class="form-group">
-	<span>이름</span>
-	<input type="text" class="form-control col-5" id="name">
+	<input type="text" class="form-control col-5" id="name" placeholder="이름을 입력하세요.">
 </div>
 
 <div class="form-group">
-	<span>이메일</span>
-	<input type="text" class="form-control col-5" id="email">
+	<input type="text" class="form-control col-5" id="email" placeholder="이메일을 입력하세요.">
 </div>
 <button type="submit" class="btn btn-info" id="signInBtn">회원가입</button>
+</form>
 
 <script>
 	$(document).ready(function(){
@@ -62,6 +60,61 @@
 				}
 			});
 			
+		});
+		
+		$("#signInBtn").on("submit", function(e){
+			e.preventDefault();
+			
+			let loginId = $("#loginId").val().trim();
+			let password = $("#password").val();
+			let confirmPassword = $("#confirmPassword").val();
+			let name = $("#name").val().trim();
+			let email = $("#email").val().trim();
+			
+			if(!loginId){
+				alert("아이디를 입력해주세요.");
+				return false;
+			}
+			
+			if(!password){
+				alert("비밀번호를 입력해주세요.");
+				return false;
+			}
+			
+			if(!confirmPassword){
+				alert("비밀번호를 입력해주세요.");
+				return false;
+			}
+			
+			if(!name){
+				alert("이름을 입력해주세요.");
+				return false;
+			}
+			
+			if(!email){
+				alert("이메일을 입력해주세요.");
+				return false;
+			}
+			
+			if($("successId").hasClass("d-none")){
+				alert("아이디 중복확인을 다시 해주세요.");
+				return false;
+			}
+			
+			let url = $(this).attr("action");
+			console.log(url);
+			let param = $(this).serialize();
+			console.log(params);
+			
+			$.post(url, params)
+			.done(function(data){
+				if (data.code == 1) {	// 성공
+					alert("가입을 환영합니다! 로그인을 해주세요.");
+					location.href="/user/sign_in";
+				} else {	// 실패
+					alert(data.errorMessage);
+				}
+			})
 		});
 	});
 </script>

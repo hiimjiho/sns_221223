@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>회원가입</title>
 <!-- cdn -->
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <!-- css -->
@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 </head>
 <body>
-	<div id="wrap" class="bg-secondary container">
+	<div id="wrap" class="container">
 		<header>
 			<jsp:include page="../include/header.jsp" />
 		</header>
