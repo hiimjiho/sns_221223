@@ -9,9 +9,13 @@ import com.sns.user.model.User;
 public interface UserMapper {
 	public User selectUserByLoginId(String loginId);
 	
-	public int getUser(
-			@Param("loginId")String loginId,
-			String password,
-			String name,
-			String email)
+	public int insertUserMembership(
+			@Param("loginId") String loginId,
+			@Param("password") String password,
+			@Param("name") String name,
+			@Param("email") String email);
+	
+	public User selectUserByLoginIdPassword(
+			@Param("loginId") String loginId,
+			@Param("password") String password);
 }
