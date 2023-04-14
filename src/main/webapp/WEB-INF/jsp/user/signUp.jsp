@@ -28,7 +28,7 @@
 <div class="form-group">
 	<input type="text" class="form-control col-5" id="email" placeholder="이메일을 입력하세요.">
 </div>
-<button type="submit" class="btn btn-info" id="signInBtn">회원가입</button>
+<button type="submit" class="btn btn-info" id="signUpBtn">회원가입</button>
 </form>
 
 <script>
@@ -62,7 +62,7 @@
 			
 		});
 		
-		$("#signUpForm").on("submit", function(e){
+		$('#signUpForm').on('submit', function(e){
 			e.preventDefault();	// submit 기능 중단
 			
 			// validation
@@ -110,7 +110,7 @@
 			// 2) ajax		// restController
 			let url = $(this).attr("action");
 			console.log(url);
-			let params = $(this).serialize();	// form 태그에 있는 name 속성 값들로 파라미터 구성
+			let params = $(this).serialize(); 	// form 태그에 있는 name 속성 값들로 파라미터 구성
 			console.log(params);
 			
 			$.post(url, params)	//request
