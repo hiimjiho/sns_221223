@@ -60,30 +60,21 @@ public class UserRestController {
 	public Map<String, Object> signIn(
 			@RequestParam("loginId") String loginId,
 			@RequestParam("password") String password,
-			HttpServletRequest request){
+			HttpSession session) {
 		
-		// password hashing
-		String hashedPassword = EncryptUtils.md5(password);
+		String encryptPassword = EncryptUtils.md5(password);
+		User user = userBO.getUserByLoginIdPassword(loginId, encryptPassword);
 		
-		// select null or 1행
-		User user = userBO.getUserByLoginIdPassword(loginId, hashedPassword);
-		
-		// 로그인 처리
 		Map<String, Object> result = new HashMap<>();
-		if(user != null) {
-			result.put("code", 1);
-			result.put("result", "성공");
-			
-			// 세션에 유저 정보 담기(로그인 상태 유지)
-			HttpSession session = request.getSession();
-			session.setAttribute("userId", user.getId());
-			session.setAttribute("userName", user.getName());
+		if (user != null) {
+			result.put("result", "success");
+			// 로그인 처리 - 세션에 저장(로그인 상태를 유지한다)
 			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userName", user.getName());	
+			session.setAttribute("userId", user.getId());	
 		} else {
-			result.put("code", 500);
-			result.put("errorMessage", "존재하지 않는 사용자입니다.");
+			result.put("error", "입력 실패");
 		}
-		
 		return result;
 	}
 }
