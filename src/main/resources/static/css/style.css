@@ -1,10 +1,14 @@
 @charset "UTF-8";
-#wrap{
-min-width:500px;
-max-width:700px;}
+a, a:hover {text-decoration:none; color:#000;}
 
-#signInBtn{margin-left:90px;}
+header {height:80px; background-color:#ededed;}
+.sign-up-box {width:650px; background-color:#ebebeb; margin-top:20px; box-shadow:5px 5px 5px 5px #BDC0C0;}
+.sign-up-subject {margin:20px; font-weight:bold;}
 
-#postBtn{margin-left:600px;
-		margin-bottom:500px;
-}
+.shadow-box {width:550px; background-color:#ebebeb; margin-top:20px; box-shadow:5px 5px 5px 5px #BDC0C0;}
+.login-box {width:400px;}
+
+.contents-box {width:650px;}
+#writeTextArea {height:100px;}
+
+.comment-input {width:565px;}
