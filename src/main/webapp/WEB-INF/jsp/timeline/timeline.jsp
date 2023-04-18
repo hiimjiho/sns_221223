@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+
 <div class="d-flex justify-content-center">
 	<div class="contents-box">
 		<%-- 글쓰기 영역: 로그인 된 상태에서만 보여짐 --%>
@@ -35,7 +38,7 @@
 			<div class="card border rounded mt-3">
 				<%-- 글쓴이, 더보기(삭제) --%>
 				<div class="p-2 d-flex justify-content-between">
-					<span class="font-weight-bold">사용자</span>
+					<span class="font-weight-bold">${post.userId}</span>
 
 					<%-- 더보기(내가 쓴 글일 때만 노출) --%>
 					<a href="#" class="more-btn"> <img
@@ -45,10 +48,11 @@
 				</div>
 
 				<%-- 카드 이미지 --%>
+			<c:forEach var="post" items="${postList}">
 				<div class="card-img">
 					<img
-						src="https://cdn.pixabay.com/photo/2023/04/08/08/38/cat-7908955_960_720.jpg"
-						class="w-100" alt="본문 이미지">
+						src="${post.imagePath}"
+						class="w-100" alt="본문 이미지" width="650px" height="500px">
 				</div>
 
 				<%-- 좋아요 --%>
@@ -61,9 +65,9 @@
 
 				<%-- 글 --%>
 				<div class="card-post m-3">
-					<span class="font-weight-bold">사용자</span> <span>왈왈</span>
+					<span class="font-weight-bold"></span> <span>${post.content}</span>
 				</div>
-
+			
 				<%-- 댓글 --%>
 				<div class="card-comment-desc border-bottom">
 					<div class="ml-3 mb-1 font-weight-bold">댓글</div>
@@ -84,13 +88,15 @@
 					</div>
 
 					<%-- 댓글 쓰기 --%>
+					<c:if test="${not empty userId}">
 					<div class="comment-write d-flex border-top mt-2">
 						<input type="text"
-							class="form-control border-0 mr-2 comment-input"
-							placeholder="댓글 달기" />
-						<button type="button" class="comment-btn btn btn-info">게시</button>
+							class="form-control border-0 mr-2 comment-input" placeholder="댓글 달기" />
+						<button type="button" class="comment-btn btn btn-info" data-post-id="${post.id}">게시</button>
 					</div>
+					</c:if>
 				</div>
+			</c:forEach>
 				<%--// 댓글 목록 끝 --%>
 			</div>
 			<%--// 카드1 끝 --%>
@@ -141,11 +147,11 @@
 			}
 
 			// 글내용, 이미지, 확장자 체크
-
-			let ext = file.split('.').pop().toLowerCase(); // 파일 경로를 .으로 나누고 확장자가 있는 마지막 문자열을 가져온 후 모두 소문자로 변경
-			if ($.inArray(ext, [ 'gif', 'png', 'jpg', 'jpeg' ]) == -1) {
-				alert("gif, png, jpg, jpeg 파일만 업로드 할 수 있습니다.");
-				$('#file').val(''); // 파일을 비운다.
+			
+			let ext = file.split(".").pop().toLowerCase();
+			if (ext != "jpg" && ext != "png" && ext != "jpeg" && ext != "gif") {
+				alert("이미지 파일만 업로드할 수 있습니다.");
+				$("#file").val(""); // 파일태그의 파일 제거.
 				return;
 			}
 
@@ -155,7 +161,7 @@
 			formData.append("file", $("#file")[0].files[0]);
 
 			$.ajax({
-
+				// response
 				type : "POST",
 				url : "/post/create",
 				data : formData,
@@ -164,7 +170,8 @@
 				processData : false // file 업로드를 위한 필수 설정
 				,
 				contentType : false // file 업로드를 위한 필수 설정
-
+				
+				// response
 				,
 				success : function(data) {
 					if (data.code == 1) {
@@ -178,7 +185,18 @@
 					alert("글을 저장하는데 실패했습니다.");
 				}
 			});
-
+		});
+		$(".comment-btn").on("click", function(){
+			let id = $(this).data("post-id");
+			alert(id);
+			// 1) 댓글 내용 가져오기
+		//	let comment = $(this).prev().val();
+		//	alert(comment);
+		
+		// 2) 댓글 내용 가져오기
+		// let comment = $(this).siblings("#input").val();
+		// alert(comment);
+		
 		});
 	});
 </script>
