@@ -121,12 +121,27 @@
 		$("#writeBtn").on("click", function(){
 			// validation
 			let content = $("#writeTextArea").val().trim()
+			let file = $("#file").val();
 			
 			// 글내용, 이미지, 확장자 체크
 			if(!content){
 				alert("내용을 입력해주세요");
 				return;
 			}
+			
+			if(!file){
+				alert("파일을 첨부해주세요");
+				return;
+			}
+			
+			let ext = fileName.split(".").pop().toLowerCase();
+			if(ext != "jpg" && ext != "png" && ext != "jpeg" && ext != "gif") {
+				alert("이미지 파일만 업로드할 수 있습니다.");
+				$("#file").val("");		// 파일태그의 파일 제거.
+				$("#fileName").text("");	// 파일 이름 비우기
+				return;
+			}
+			
 			// ajax 전송
 			let formData = new FormData();
 			formData.append("content", content);

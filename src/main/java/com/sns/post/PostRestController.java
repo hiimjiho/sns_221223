@@ -26,11 +26,18 @@ public class PostRestController {
 			@RequestParam(value = "file", required=false) MultipartFile file,
 			HttpSession session
 			) {
-		int userId = (int)session.getAttribute("userId");
+		Integer userId = (Integer)session.getAttribute("userId");
 		
-		postBO.addContent(userId, content, file);
+		
 		
 		Map<String, Object> result = new HashMap<>();
+		if(userId == null) {
+			result.put("code", 500);
+			result.put("result", "error");
+			result.put("errormessage", "error");
+			return result;
+		}
+		postBO.addContent(userId, content, file);
 		result.put("code", 1);
 		result.put("result", "성공");
 		return result;
