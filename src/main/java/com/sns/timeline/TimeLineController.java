@@ -8,10 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sns.comment.bo.CommentBO;
-import com.sns.comment.model.Comment;
-import com.sns.post.bo.PostBO;
-import com.sns.post.model.Post;
+import com.sns.timeline.bo.TimelineBO;
+import com.sns.timeline.model.CardView;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -19,10 +17,7 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/timeline")
 public class TimeLineController {
 	@Autowired
-	private PostBO postBO;
-	
-	@Autowired
-	private CommentBO commentBO;
+	private TimelineBO timelineBO;
 	
 	@GetMapping("/timeline_view")
 	public String timeLineView(
@@ -30,10 +25,12 @@ public class TimeLineController {
 			Model model
 			) {
 		
-		List<Post> postList = postBO.getPostList();
-		List<Comment> commentList = commentBO.getCommentList();
-		model.addAttribute("postList", postList);
-		model.addAttribute("commentList", commentList);
+		//List<Post> postList = postBO.getPostList();
+		//List<Comment> commentList = commentBO.getCommentList();
+		//model.addAttribute("postList", postList);
+		//model.addAttribute("commentList", commentList);
+		List<CardView> cardList = timelineBO.generateCardList();
+		model.addAttribute("cardList", cardList);
 		model.addAttribute("view", "timeline/timeline");
 		return "template/layout";
 	}
