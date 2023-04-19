@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sns.comment.bo.CommentBO;
@@ -21,7 +22,9 @@ public class CommentRestController {
 	@PostMapping("/create")
 	public Map<String, Object> create(
 			HttpSession session,
-			String content){
+			@RequestParam("postId") int postId,
+			@RequestParam("content") String content
+			){
 		
 		Integer userId = (Integer)session.getAttribute("userId");
 		Map<String, Object> result = new HashMap<>();
@@ -32,7 +35,10 @@ public class CommentRestController {
 			result.put("errormessage", "error");
 			return result;
 		}
-		commentBO.addComment(content, userId);
+		
+		commentBO.addComment(content, userId, postId);
+		result.put("code", 1);
+		result.put("result", "성공");
 		
 		return result;
 	}

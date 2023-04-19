@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="d-flex justify-content-center">
 	<div class="contents-box">
@@ -48,55 +48,57 @@
 				</div>
 
 				<%-- 카드 이미지 --%>
-			<c:forEach var="post" items="${postList}">
-				<div class="card-img">
-					<img
-						src="${post.imagePath}"
-						class="w-100" alt="본문 이미지" width="650px" height="500px">
-				</div>
-
-				<%-- 좋아요 --%>
-				<div class="card-like m-3">
-					<a href="#" class="like-btn"> <img
-						src="https://www.iconninja.com/files/214/518/441/heart-icon.png"
-						width="18px" height="18px" alt="비워진 하트">
-					</a> 좋아요 10개
-				</div>
-
-				<%-- 글 --%>
-				<div class="card-post m-3">
-					<span class="font-weight-bold"></span> <span>${post.content}</span>
-				</div>
-			
-				<%-- 댓글 --%>
-				<div class="card-comment-desc border-bottom">
-					<div class="ml-3 mb-1 font-weight-bold">댓글</div>
-				</div>
-
-				<%-- 댓글 목록 --%>
-				<div class="card-comment-list m-2">
-
-					<%-- 댓글 내용 --%>
-					<div class="card-comment m-1">
-						<span class="font-weight-bold">댓글사용자:</span> <span>냐옹</span>
-
-						<%-- 댓글 삭제 버튼 --%>
-						<a href="#" class="commentDelBtn"> <img
-							src="https://www.iconninja.com/files/603/22/506/x-icon.png"
-							width="10px" height="10px" alt="댓글 삭제버튼">
-						</a>
+				<c:forEach var="post" items="${postList}">
+					<div class="card-img">
+						<img src="${post.imagePath}" class="w-100" alt="본문 이미지"
+							width="650px" height="500px">
 					</div>
 
-					<%-- 댓글 쓰기 --%>
-					<c:if test="${not empty userId}">
-					<div class="comment-write d-flex border-top mt-2">
-						<input type="text"
-							class="form-control border-0 mr-2 comment-input" placeholder="댓글 달기" />
-						<button type="button" class="comment-btn btn btn-info" data-post-id="${post.id}">게시</button>
+					<%-- 좋아요 --%>
+					<div class="card-like m-3">
+						<a href="#" class="like-btn"> <img
+							src="https://www.iconninja.com/files/214/518/441/heart-icon.png"
+							width="18px" height="18px" alt="비워진 하트">
+						</a> 좋아요 10개
 					</div>
-					</c:if>
-				</div>
-			</c:forEach>
+
+					<%-- 글 --%>
+					<div class="card-post m-3">
+						<span class="font-weight-bold"></span> <span>${post.content}</span>
+					</div>
+
+					<%-- 댓글 --%>
+					<div class="card-comment-desc border-bottom">
+						<div class="ml-3 mb-1 font-weight-bold">댓글</div>
+					</div>
+
+					<%-- 댓글 목록 --%>
+					<div class="card-comment-list m-2">
+
+						<%-- 댓글 내용 --%>
+						<c:forEach var="comment" items="${commentList}">
+						<div class="card-comment m-1">
+							<span class="font-weight-bold">댓글사용자:</span> <span>${comment.content}</span>
+		
+							<%-- 댓글 삭제 버튼 --%>
+							<a href="#" class="commentDelBtn"> <img
+								src="https://www.iconninja.com/files/603/22/506/x-icon.png"
+								width="10px" height="10px" alt="댓글 삭제버튼">
+							</a>
+						</div>
+						</c:forEach>
+						<%-- 댓글 쓰기 --%>
+						<c:if test="${not empty userId}">
+							<div class="comment-write d-flex border-top mt-2">
+								<input type="text" id="comment"
+									class="form-control border-0 mr-2 comment-input"
+									placeholder="댓글 달기" />
+								<button type="button" class="comment-btn btn btn-info"
+									data-post-id="${post.id}">게시</button>
+							</div>
+						</c:if>
+					</div>
+				</c:forEach>
 				<%--// 댓글 목록 끝 --%>
 			</div>
 			<%--// 카드1 끝 --%>
@@ -147,7 +149,7 @@
 			}
 
 			// 글내용, 이미지, 확장자 체크
-			
+
 			let ext = file.split(".").pop().toLowerCase();
 			if (ext != "jpg" && ext != "png" && ext != "jpeg" && ext != "gif") {
 				alert("이미지 파일만 업로드할 수 있습니다.");
@@ -170,7 +172,7 @@
 				processData : false // file 업로드를 위한 필수 설정
 				,
 				contentType : false // file 업로드를 위한 필수 설정
-				
+
 				// response
 				,
 				success : function(data) {
@@ -186,17 +188,42 @@
 				}
 			});
 		});
-		$(".comment-btn").on("click", function(){
-			let id = $(this).data("post-id");
-			alert(id);
+		
+		$(".comment-btn").on("click", function() {
+			let postId = $(this).data("post-id");
 			// 1) 댓글 내용 가져오기
-		//	let comment = $(this).prev().val();
-		//	alert(comment);
-		
-		// 2) 댓글 내용 가져오기
-		// let comment = $(this).siblings("#input").val();
-		// alert(comment);
-		
+			//	let comment = $(this).prev().val();
+			//	alert(comment);
+
+			// 2) 댓글 내용 가져오기
+			let content = $(this).siblings("#comment").val();
+			alert(comment);
+			if (!comment) {
+				alert("내용을 입력해주세요");
+				return;
+			}
+
+			$.ajax({
+				type : "post",
+				url : "/comment/create",
+				data : {
+					"postId" : postId,
+					"content" : content
+				},
+				success : function(data) {
+					if (data.code == 1) {
+						alert("댓글 작성이 완료되었습니다.");
+						location.href = "/timeline/timeline_view";
+					} else {
+						alert(data.errormessage);
+					}
+				},
+				error : function(reqeust, status, error) {
+					alert("글을 저장하는데 실패했습니다.");
+				}
+
+			});
+
 		});
 	});
 </script>
