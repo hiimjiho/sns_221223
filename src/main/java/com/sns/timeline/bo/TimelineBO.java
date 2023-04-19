@@ -41,7 +41,7 @@ public class TimelineBO {
 			card.setPost(post);
 			
 			// 글쓴이 정보
-			User user = userBO.getUserByUserId(post.getId());
+			User user = userBO.getUserById(post.getId());
 			card.setUser(user);
 			
 			// 댓글들

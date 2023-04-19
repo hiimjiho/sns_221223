@@ -23,7 +23,7 @@ public class UserBO {
 		return userMapper.selectUserByLoginIdPassword(loginId, password);
 	}
 	
-	public User getUserByUserId(int id) {
-		return userMapper.selectUserByUserId(id);
+	public User getUserById(int id) {
+		return userMapper.selectUserById(id);
 	}
 }
