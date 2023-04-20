@@ -36,7 +36,7 @@ public class TimeLineController {
 		//model.addAttribute("postList", postList);
 		//model.addAttribute("commentList", commentList);
 		List<CardView> cardList = timelineBO.generateCardList();
-		List<CommentView> commentViewList = commentBO.generateCommentViewList(commentBO.); 
+		List<CommentView> commentViewList = commentBO.generateCommentViewList(); 
 		model.addAttribute("cardList", cardList);
 		model.addAttribute("commentViewList", commentViewList);		
 		model.addAttribute("view", "timeline/timeline");

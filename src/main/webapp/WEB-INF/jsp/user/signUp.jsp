@@ -57,8 +57,7 @@
 			if(loginId.length < 4){
 				$("#idCheckLength").removeClass('d-none');
 				return;
-			}
-			
+			}	
 			// AJAX 통신으로 중복확인
 			$.ajax({
 				//request		 type은 get일 경우 제외해도 동작가능
