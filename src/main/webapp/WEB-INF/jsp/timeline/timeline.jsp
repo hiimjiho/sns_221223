@@ -64,7 +64,6 @@
 				</div>
 				
 				<%-- 댓글 --%>
-				<c:forEach items="${commentViewList}" var="comment">
 				<div class="card-comment-desc border-bottom">
 					<div class="ml-3 mb-1 font-weight-bold">댓글</div>
 				</div>
@@ -72,34 +71,38 @@
 				<%-- 댓글 목록 --%>
 				<div class="card-comment-list m-2">
 					
+				<c:forEach items="${card.commentList}" var="commentList">
 					<%-- 댓글 내용 --%>
 					<div class="card-comment m-1">
-						<span class="font-weight-bold">${comment.user.loginId}</span>
-						<span>${comment.comment.content}</span>
-						
+						<span class="font-weight-bold">${commentList.comment.userId}</span>
+						<span>${commentList.comment.content}</span>
 						<%-- 댓글 삭제 버튼 --%>
 						<a href="#" class="commentDelBtn">
 							<img src="https://www.iconninja.com/files/603/22/506/x-icon.png" width="10px" height="10px">
 						</a>
 					</div>
-					
+						</c:forEach>
 					<%-- 댓글 쓰기 --%>
 					<c:if test="${not empty userId}">
 					<div class="comment-write d-flex border-top mt-2">
 						<input type="text" class="form-control border-0 mr-2 comment-input" placeholder="댓글 달기" id="comment"/> 
 						<button type="button" class="comment-btn btn btn-light" data-post-id="${card.post.id}">게시</button>
 					</div>
+					
 					</c:if>
 				</div>
 				<%--// 댓글 목록 끝 --%>
-			</c:forEach>
 			</div>
-			</c:forEach>
+			
 			<%--// 카드1 끝 --%>
+		</c:forEach>
+		
 		</div>
 		<%--// 타임라인 영역 끝  --%>
+	
 	</div>
 </div>
+
 
 <script>
 	$(document).ready(function() {
