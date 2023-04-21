@@ -25,11 +25,12 @@ public class TimeLineController {
 			Model model
 			) {
 		
+		Integer userId = (Integer)session.getAttribute("userId");
 		//List<Post> postList = postBO.getPostList();
 		//List<Comment> commentList = commentBO.getCommentList();
 		//model.addAttribute("postList", postList);
 		//model.addAttribute("commentList", commentList);
-		List<CardView> cardList = timelineBO.generateCardList();
+		List<CardView> cardList = timelineBO.generateCardList(userId);
 		model.addAttribute("cardList", cardList);	
 		model.addAttribute("view", "timeline/timeline");
 		return "template/layout";

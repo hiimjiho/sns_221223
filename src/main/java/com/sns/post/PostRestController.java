@@ -34,7 +34,7 @@ public class PostRestController {
 		if(userId == null) {
 			result.put("code", 500);
 			result.put("result", "error");
-			result.put("errormessage", "error");
+			result.put("errorMessage", "error");
 			return result;
 		}
 		postBO.addContent(userId, content, file);
@@ -43,5 +43,6 @@ public class PostRestController {
 		return result;
 		
 	}
+	
 	
 }

@@ -42,4 +42,24 @@ public class CommentRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/delete")
+	public Map<String, Object> delete(
+			@RequestParam("postId") int postId,
+			HttpSession session){
+		
+		Integer userId = (Integer)session.getAttribute("userId");
+		Map<String, Object> result = new HashMap<>();
+		
+		if(userId == null) {
+			result.put("code", 500);
+			result.put("result", "error");
+			result.put("errorMessage", "error");
+			return result;
+		}
+		result.put("code", 1);
+		result.put("result", "성공");
+		return result;
+	}
+	
 }
