@@ -26,7 +26,8 @@ public class TimelineBO {
 	@Autowired 
 	private CommentBO commentBO;
 	
-	public List<CardView> generateCardList() {
+	// 비로그인도 카드 리스트가 보여져야 하기 때문에 userId는 null 가능
+	public List<CardView> generateCardList(Integer userid) {
 		List<CardView> cardViewList = new ArrayList<>();
 		
 		// 글 목록을 가져온다.
@@ -47,6 +48,9 @@ public class TimelineBO {
 			// 댓글들
 			List<CommentView> commentViewList = commentBO.generateCommentViewList(post.getId());
 			card.setCommentList(commentViewList);
+			
+			// 내가(로그인이 된 사람) 좋아요를 눌렀는지 여부
+			card.setFilledLike(false);
 			
 			// !!!!!!!!!!!!!!! 카드리스트에 채우기 !!
 			cardViewList.add(card);

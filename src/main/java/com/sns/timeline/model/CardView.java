@@ -19,9 +19,10 @@ public class CardView {
 	private List<CommentView> commentList;
 	
 	// 좋아요 n개
-		
-		
+	private int 
+	
 	// 내가(로그인 된 사람)좋아요 한지 여부 boolean
+	private boolean filledLike;
 	
 
 	public Post getPost() {
@@ -46,6 +47,14 @@ public class CardView {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public boolean isFilledLike() {
+		return filledLike;
+	}
+
+	public void setFilledLike(boolean filledLike) {
+		this.filledLike = filledLike;
 	}
 	
 	

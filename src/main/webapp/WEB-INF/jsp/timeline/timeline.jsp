@@ -51,9 +51,16 @@
 				
 				<%-- 좋아요 --%>
 				<div class="card-like m-3">
-					<a href="#" class="like-btn" >
+				<%-- 좋아요가 눌려져있지 않을 때 (빈 하트) --%>
+					<a href="#" class="like-btn" data-post-id="${card.post.id}">
+						<img src="https://cdn.pixabay.com/photo/2016/01/20/14/22/heart-1151623_960_720.png" width="18px" height="18px" alt="filled heart">
+					</a>
+				<%--좋아요가 눌려졌을 때 (채워진 하트) --%>
+				<c:if test="${not empty userId}">
+					<a href="#" class="like-btn" data-post-id="${card.post.id}">
 						<img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="18px" height="18px" alt="filled heart">
 					</a>
+				</c:if>
 					좋아요 10개
 				</div>
 				
@@ -71,13 +78,13 @@
 				<%-- 댓글 목록 --%>
 				<div class="card-comment-list m-2">
 					
-				<c:forEach items="${card.commentList}" var="commentList">
+				<c:forEach items="${card.commentList}" var="commentView">
 					<%-- 댓글 내용 --%>
 					<div class="card-comment m-1">
-						<span class="font-weight-bold">${commentList.comment.userId}</span>
-						<span>${commentList.comment.content}</span>
+						<span class="font-weight-bold">${commentView.user.loginId}</span>
+						<span>${commentView.comment.content}</span>
 						<%-- 댓글 삭제 버튼 --%>
-						<a href="#" class="commentDelBtn">
+						<a href="#" class="commentDelBtn" data-post-id="${commentView.comment.content}">
 							<img src="https://www.iconninja.com/files/603/22/506/x-icon.png" width="10px" height="10px">
 						</a>
 					</div>
@@ -93,9 +100,9 @@
 				</div>
 				<%--// 댓글 목록 끝 --%>
 			</div>
-			
+			</c:forEach>
 			<%--// 카드1 끝 --%>
-		</c:forEach>
+		
 		
 		</div>
 		<%--// 타임라인 영역 끝  --%>
@@ -221,5 +228,31 @@
 			});
 
 		});
+		
+		$(".like-btn").on("click", function(){
+			let postId = $(this).data("post-id");
+			
+			$.ajax({
+				url:"/like/" + postId
+				
+				// res
+				, success:function(data){
+					if(data.code == 1){
+						location.reload();
+					}else{
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(request, status, error){
+					alert("다시 시도하십시오");
+				}
+			});
+			
+		});
+		$(".commentDelBtn").on("click", function(){
+			let commentId = $(this).data("post-id");
+			alert(commentId);
+		});
+		
 	});
 </script>

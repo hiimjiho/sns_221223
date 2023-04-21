@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 import com.sns.comment.dao.CommentMapper;
 import com.sns.comment.model.Comment;
 import com.sns.comment.model.CommentView;
+import com.sns.user.bo.UserBO;
+import com.sns.user.model.User;
 
 @Service
 public class CommentBO {
 	@Autowired
 	private CommentMapper commentMapper;
+	
+	@Autowired UserBO userBO;
 	
 	public int addComment(String content, int userId, int postId) {
 		return commentMapper.insertComment(content, userId, postId);
@@ -36,9 +40,18 @@ public class CommentBO {
 			//	Comment => CommentView
 			CommentView commentView = new CommentView();
 			
+			// 댓글 하나
 			commentView.setComment(comment);
+			
+			// 댓글쓴이
+			User user = userBO.getUserById(comment.getUserId());
+			commentView.setUser(user);
+			
+			// !!!!!!!!!! 새로만든 댓글 정보를 리스트에 담는다.
 			commentViewList.add(commentView);
 		}
+		
 		return commentViewList;
 	}
+	
 }
