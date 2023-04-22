@@ -56,11 +56,9 @@
 						<img src="https://cdn.pixabay.com/photo/2016/01/20/14/22/heart-1151623_960_720.png" width="18px" height="18px" alt="filled heart">
 					</a>
 				<%--좋아요가 눌려졌을 때 (채워진 하트) --%>
-				<c:if test="${not empty userId}">
 					<a href="#" class="like-btn" data-post-id="${card.post.id}">
 						<img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="18px" height="18px" alt="filled heart">
 					</a>
-				</c:if>
 					좋아요 10개
 				</div>
 				
@@ -252,6 +250,23 @@
 		$(".commentDelBtn").on("click", function(){
 			let commentId = $(this).data("post-id");
 			alert(commentId);
+			$.ajax({
+				type :"post"
+				, url : "/comment/delete"
+				, data : commentId
+				
+				, success : function(data){
+					if(data.code == 1){
+						alert("댓글이 삭제되었습니다.");
+						location.href = "/timeline/timeline_view";
+					}else{
+						alert(errorMessage);
+					}
+				}
+					, error: function(request, status, error){
+						alert("댓글을 삭제하는데 실패했습니다.");
+					}
+			});
 		});
 		
 	});

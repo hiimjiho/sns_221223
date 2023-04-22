@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sns.comment.bo.CommentBO;
+import com.sns.comment.model.Comment;
 import com.sns.timeline.bo.TimelineBO;
 import com.sns.timeline.model.CardView;
 

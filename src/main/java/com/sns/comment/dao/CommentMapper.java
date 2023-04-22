@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sns.comment.model.Comment;
+import com.sns.comment.model.CommentView;
 
 @Repository
 public interface CommentMapper {
@@ -19,4 +20,7 @@ public interface CommentMapper {
 	public List<Comment> selectCommentListByPostId(int postId);
 	
 	public int deleteCommentByPostId(int postId);
+	
+	public List<CommentView> deleteComment(
+			@Param("postId") int postId);
 }

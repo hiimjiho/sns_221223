@@ -57,6 +57,7 @@ public class CommentRestController {
 			result.put("errorMessage", "error");
 			return result;
 		}
+		commentBO.deleteComment(postId);
 		result.put("code", 1);
 		result.put("result", "성공");
 		return result;
