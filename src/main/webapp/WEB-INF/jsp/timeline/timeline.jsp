@@ -247,13 +247,16 @@
 			});
 			
 		});
+		
 		$(".commentDelBtn").on("click", function(){
 			let commentId = $(this).data("post-id");
 			alert(commentId);
 			$.ajax({
 				type :"post"
 				, url : "/comment/delete"
-				, data : commentId
+				, data : {
+					"commentId" : commentId,
+				}
 				
 				, success : function(data){
 					if(data.code == 1){

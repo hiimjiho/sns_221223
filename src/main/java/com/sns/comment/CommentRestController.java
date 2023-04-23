@@ -46,6 +46,7 @@ public class CommentRestController {
 	@PostMapping("/delete")
 	public Map<String, Object> delete(
 			@RequestParam("postId") int postId,
+			@RequestParam("content") String content,
 			HttpSession session){
 		
 		Integer userId = (Integer)session.getAttribute("userId");
@@ -57,7 +58,7 @@ public class CommentRestController {
 			result.put("errorMessage", "error");
 			return result;
 		}
-		commentBO.deleteComment(postId);
+		commentBO.deleteComment(content, postId, postId);
 		result.put("code", 1);
 		result.put("result", "성공");
 		return result;

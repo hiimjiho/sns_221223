@@ -54,8 +54,7 @@ public class CommentBO {
 		return commentViewList;
 	}
 	
-	public List<CommentView> deleteComment(int postId){
-		return commentMapper.deleteComment(postId);
+	public int deleteComment(String content, int userId, int postId) {
+		return commentMapper.deleteComment(content, userId, postId);
 	}
-	
 }

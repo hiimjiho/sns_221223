@@ -45,10 +45,12 @@
 		WHERE
 			`postId` = #{postId}
  	</select>
- 	<delete id="deleteComment" parameterType="int">
+ 	<delete id="deleteComment" parameterType="map">
  		DELETE FROM
  			`comment`
  			WHERE
  				`postId` = #{postId}
+ 			AND
+ 				`content` = #{content}
  	</delete> 
  </mapper>
