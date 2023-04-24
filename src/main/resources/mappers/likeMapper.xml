@@ -35,4 +35,16 @@
  		AND 
  			`userId` = #{userId}
  	</delete>
+ 	
+ 	<select id="selectLike" parameterType="map" resultType="com.sns.like.model.Like">
+ 		SELECT
+ 			`postId`
+ 			, `userId`
+ 		FROM
+ 			`like`
+ 		WHERE
+ 			`postId` = #{postId}
+ 		AND
+ 			`userId` = #{userId}
+ 	</select>
  </mapper>

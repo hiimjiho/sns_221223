@@ -52,14 +52,18 @@
 				<%-- 좋아요 --%>
 				<div class="card-like m-3">
 				<%-- 좋아요가 눌려져있지 않을 때 (빈 하트) --%>
+				<c:if test="${card.filledLike eq false}">
 					<a href="#" class="like-btn" data-post-id="${card.post.id}">
 						<img src="https://cdn.pixabay.com/photo/2016/01/20/14/22/heart-1151623_960_720.png" width="18px" height="18px" alt="filled heart">
 					</a>
+				</c:if>
 				<%--좋아요가 눌려졌을 때 (채워진 하트) --%>
+					<c:if test="${card.filledLike eq true}">
 					<a href="#" class="like-btn" data-post-id="${card.post.id}">
 						<img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="18px" height="18px" alt="filled heart">
 					</a>
 					좋아요 10개
+				</c:if>
 				</div>
 				
 				<%-- 글 --%>
@@ -228,7 +232,8 @@
 
 		});
 		
-		$(".like-btn").on("click", function(){
+		$(".like-btn").on("click", function(e){
+			e.preventDefault();
 			let postId = $(this).data("post-id");
 			
 			$.ajax({

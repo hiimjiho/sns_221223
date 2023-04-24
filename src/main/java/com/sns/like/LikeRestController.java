@@ -29,7 +29,7 @@ public class LikeRestController {
 		Map<String, Object> result = new HashMap<>();
 		Integer userId = (Integer)session.getAttribute("userId");
 		// BO 호출 => BO안에서 like 여부 체크 
-		likeBO.likeToggle(postId, postId);
+		likeBO.likeToggle(postId, userId);
 		// 응답
 		if(userId == null) {
 			result.put("code", 500);
