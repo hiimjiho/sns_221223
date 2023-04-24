@@ -49,8 +49,8 @@
  		DELETE FROM
  			`comment`
  			WHERE
- 				`postId` = #{postId}
+ 				`id` = #{id}
  			AND
- 				`content` = #{content}
+ 				`userId` = #{userId}
  	</delete> 
  </mapper>

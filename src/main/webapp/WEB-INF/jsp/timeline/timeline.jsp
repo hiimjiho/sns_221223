@@ -82,7 +82,7 @@
 						<span class="font-weight-bold">${commentView.user.loginId}</span>
 						<span>${commentView.comment.content}</span>
 						<%-- 댓글 삭제 버튼 --%>
-						<a href="#" class="commentDelBtn" data-post-id="${commentView.comment.content}">
+						<a href="#" class="commentDelBtn" data-comment-id="${commentView.comment.id}">
 							<img src="https://www.iconninja.com/files/603/22/506/x-icon.png" width="10px" height="10px">
 						</a>
 					</div>
@@ -191,7 +191,8 @@
 			});
 		});
 		
-		$(".comment-btn").on("click", function() {
+		$(".comment-btn").on("click", function(e) {
+			e.preventDefault();
 			let postId = $(this).data("post-id");
 			// 1) 댓글 내용 가져오기
 			//	let comment = $(this).prev().val();
@@ -214,7 +215,7 @@
 				success : function(data) {
 					if (data.code == 1) {
 						alert("댓글 작성이 완료되었습니다.");
-						location.href = "/timeline/timeline_view";
+						location.reload();
 					} else {
 						alert(data.errormessage);
 					}
@@ -248,20 +249,20 @@
 			
 		});
 		
-		$(".commentDelBtn").on("click", function(){
-			let commentId = $(this).data("post-id");
-			alert(commentId);
+		$(".commentDelBtn").on("click", function(e){
+			e.preventDefault();
+			let commentId = $(this).data("comment-id");
 			$.ajax({
 				type :"post"
 				, url : "/comment/delete"
 				, data : {
-					"commentId" : commentId,
+					"commentId" : commentId
 				}
 				
 				, success : function(data){
 					if(data.code == 1){
 						alert("댓글이 삭제되었습니다.");
-						location.href = "/timeline/timeline_view";
+						location.reload();
 					}else{
 						alert(errorMessage);
 					}
