@@ -13,6 +13,20 @@
  			`userId` = #{userId}
  	</select>
  	
+ 	<!-- likeCount쿼리 하나로 합치기 -->
+ 	<select id="selectLikeCountByPostIdOrUserId" parameterType="map" resultType="int">
+ 		SELECT
+ 			COUNT(1)
+ 		FROM
+ 			`like`
+ 		WHERE
+ 			`postId` = #{postId}
+ 			<if test="userId != null">
+ 			AND `userId` = #{userId}
+ 			</if>
+ 	
+ 	</select>
+ 	
  	<insert id="insertLike" parameterType="map">
  		INSERT INTO `like`
  		(
@@ -46,5 +60,14 @@
  			`postId` = #{postId}
  		AND
  			`userId` = #{userId}
+ 	</select>
+ 	
+ 	<select id="selectLikeCountByPostId" parameterType="int" resultType="int">
+ 		SELECT
+ 			COUNT(1)
+ 		FROM
+ 			`like`
+ 		WHERE
+ 			`postId` = #{postId}
  	</select>
  </mapper>

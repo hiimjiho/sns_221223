@@ -56,13 +56,14 @@
 					<a href="#" class="like-btn" data-post-id="${card.post.id}">
 						<img src="https://cdn.pixabay.com/photo/2016/01/20/14/22/heart-1151623_960_720.png" width="18px" height="18px" alt="filled heart">
 					</a>
+					좋아요 ${card.likeCount}개
 				</c:if>
 				<%--좋아요가 눌려졌을 때 (채워진 하트) --%>
-					<c:if test="${card.filledLike eq true}">
+					<c:if test="${card.filledLike}">
 					<a href="#" class="like-btn" data-post-id="${card.post.id}">
 						<img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="18px" height="18px" alt="filled heart">
 					</a>
-					좋아요 10개
+					좋아요 ${card.likeCount}개
 				</c:if>
 				</div>
 				
@@ -257,6 +258,7 @@
 		$(".commentDelBtn").on("click", function(e){
 			e.preventDefault();
 			let commentId = $(this).data("comment-id");
+			alert(commentId);
 			$.ajax({
 				type :"post"
 				, url : "/comment/delete"
