@@ -43,5 +43,18 @@
  			`postId` = #{postId}
  			
  	</delete>
- 	
+ 	<select id="selectPostListByUserId" resultType="com.sns.post.model.Post" parameterType="int">
+ 		SELECT
+ 			`id`
+ 			, `userId`
+ 			, `content`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`post`
+ 		WHERE
+ 			`userId` = #{userId}
+ 		ORDER BY `id` desc
+ 	</select>
  </mapper>

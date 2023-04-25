@@ -1,8 +1,12 @@
 package com.sns.user.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sns.post.bo.PostBO;
+import com.sns.post.model.Post;
 import com.sns.user.dao.UserMapper;
 import com.sns.user.model.User;
 
@@ -10,6 +14,8 @@ import com.sns.user.model.User;
 public class UserBO {
 	@Autowired
 	private UserMapper userMapper;
+	
+	private PostBO postBO;
 	
 	public User getUserByLoginId(String loginId) {
 		return userMapper.selectUserByLoginId(loginId);
@@ -25,5 +31,9 @@ public class UserBO {
 	
 	public User getUserById(int id) {
 		return userMapper.selectUserById(id);
+	}
+	
+	public List<Post> getPostList(){
+		return postBO.getPostList();
 	}
 }

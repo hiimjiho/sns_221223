@@ -12,3 +12,9 @@ header {height:80px; background-color:#ededed;}
 #writeTextArea {height:100px;}
 
 .comment-input {width:565px;}
+
+.profileImage {margin-top:30px;}
+
+.profileLoginId {margin-top:25px; margin-left:50px; font-size:25px;}
+
+.profileCorrectionBtn{margin-top:25px; margin-left:20px;}
