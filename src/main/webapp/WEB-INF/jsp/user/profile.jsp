@@ -19,7 +19,7 @@
 <div class="d-flex">
 	<c:forEach items="${postList}" var="post">
 	<div class="postList">
-		<img src="${post.imagePath}" width=150 height=150>
+		<img src="${post.imagePath}" width=200 height=300>
 	</div>
 	</c:forEach>
 </div>

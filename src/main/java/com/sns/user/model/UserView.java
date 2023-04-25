@@ -8,10 +8,7 @@ public class UserView {
 	
 	private Post post;
 	
-	private String profileImage;
 	
-	private String introduce;
-
 	public User getUser() {
 		return user;
 	}
@@ -28,22 +25,6 @@ public class UserView {
 		this.post = post;
 	}
 
-	public String getProfileImage() {
-		return profileImage;
-	}
-
-	public void setProfileImage(String profileImage) {
-		this.profileImage = profileImage;
-	}
-
-	public String getIntroduce() {
-		return introduce;
-	}
-
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
-	
 	
 	
 }

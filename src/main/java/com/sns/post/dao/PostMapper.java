@@ -19,4 +19,8 @@ public interface PostMapper {
 	
 	public List<Post> selectPostListByUserId(int userId);
 	
+	public Post selectPostByPostId(int postId);
+	
+	public int deletePost(int postId, int userId);
+	
 }

@@ -4,13 +4,13 @@
 <div class="h-100 d-flex justify-content-between align-items-center">
 	<%-- logo --%>
 	<div>
-		<h1 class="font-weight-bold">Marondalgram</h1>
+		<h1 class="font-weight-bold"><a href="/timeline/timeline_view">Marondalgram</a></h1>
 	</div>
 	
 	<%-- 로그인 정보 --%>
 	<div>
 		<c:if test="${not empty userId}">
-			<span>${userName}님 안녕하세요</span>
+			<span><a href="/user/profile_view">${userName}</a>님 안녕하세요</span>
 			<a href="/user/sign_out" class="font-weight-bold">로그아웃</a>
 		</c:if> 
 		<c:if test="${empty userId}">

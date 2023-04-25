@@ -39,9 +39,11 @@
 					<span class="font-weight-bold">${card.user.loginId}</span>
 					
 					<%-- 더보기(내가 쓴 글일 때만 노출) --%>
-					<a href="#" class="more-btn">
+					<c:if test="${card.post.userId eq userId}">
+					<a href="#" class="more-btn" data-toggle="modal" data-target="#modal" data-post-id="${card.post.id}">
 						<img src="https://www.iconninja.com/files/860/824/939/more-icon.png" width="30">
 					</a>
+					</c:if>
 				</div>
 				
 				<%-- 카드 이미지 --%>
@@ -113,6 +115,23 @@
 		<%--// 타임라인 영역 끝  --%>
 	
 	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal">
+	<!-- modal-dialog-centered: 모달 창을 수직 가운데 정렬 -->
+	<%--modal-sm 작은 모달. --%>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content text-center">
+    	<div class="py-3 border-bottom">
+     		<a href="#" id="deletePostBtn">삭제하기</a>
+     	</div>
+     	<div class="py-3">
+     		<%-- data-dismiss="modal" => 모달창 닫힘 --%>
+     		<a href="#" data-dismiss="modal">취소하기</a>
+     	</div>
+    </div>
+  </div>
 </div>
 
 
@@ -282,5 +301,27 @@
 			});
 		});
 		
+		// 글 삭제(... 더보기 버튼 클릭)  글 삭제를 위해서
+		$(".more-btn").on("click", function(e){
+			e.preventDefault;	// a 태그 누를 때 위로 올라가는 현상 방지
+			// alert("ㅇㅇ");
+			let postId = $(this).data("post-id");
+			//alert(postId);
+			// 모달 태그에(재활용 되고 있는) data-post-id를 심어줌
+			${"#modal"}.data('post-id', postId); // setting
+			
+		});
+		// 모달 안에 있는 삭제하기 버튼 클릭
+		$("#modal #deletePostBtn").on("click", function(e){
+			e.preventDefault();
+			
+			let postId = $("#modal").data("post-id");
+			alert(postId);
+			
+			// ajax 글 삭제
+			$.ajax({
+				
+			});
+		});
 	});
 </script>

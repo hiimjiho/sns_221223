@@ -70,4 +70,5 @@
  		WHERE
  			`postId` = #{postId}
  	</select>
+ 	
  </mapper>
