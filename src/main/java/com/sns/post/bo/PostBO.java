@@ -64,6 +64,9 @@ public class PostBO {
 		// 좋아요 삭제
 		likeBO.deleteLike(postId, userId);
 		
+		// 내용 삭제
+		
+		
 		return 
 	}
 }
