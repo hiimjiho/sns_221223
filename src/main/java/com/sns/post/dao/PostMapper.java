@@ -19,15 +19,11 @@ public interface PostMapper {
 	
 	public List<Post> selectPostListByUserId(int userId);
 	
-	public Post selectPostByPostId(int postId);
-	
-	public int deletePost(
+	public Post selectPostByPostIdUserId(
 			@Param("postId") int postId,
 			@Param("userId") int userId);
 	
-	public void deletePostByContent(
+	public void deletePostByPostIdUserId(
 			@Param("postId") int postId,
-			@Param("userId") int userId,
-			@Param("content") String content);
-	
+			@Param("userId") int userId);
 }

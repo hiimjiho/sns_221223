@@ -57,7 +57,7 @@
  			`userId` = #{userId}
  		ORDER BY `id` desc
  	</select>
- 	<select id="selectPostByPostId" parameterType="int" resultType="com.sns.post.model.Post">
+ 	<select id="selectPostByPostIdUserId" parameterType="map" resultType="com.sns.post.model.Post">
  	 	SELECT
  			`id`
  			, `userId`
@@ -71,11 +71,13 @@
  			`id` = #{postId}
  	</select>
  	
- 	<delete id="deletePost" parameterType="map">
+ 	<delete id="deletePostByPostIdUserId" parameterType="map">
  		DELETE
  		FROM
  			`post`
  		WHERE
  			`id` = #{postId}
+ 		AND
+ 			`userId` = #{userId}
  	</delete>
  </mapper>

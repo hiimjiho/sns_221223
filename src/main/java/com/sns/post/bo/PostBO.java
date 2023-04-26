@@ -26,8 +26,8 @@ public class PostBO {
 	@Autowired
 	private LikeBO likeBO;
 	
-	public Post getPostByPostId(int postId) {
-		postMapper.selectPostByPostId(postId);
+	public Post getPostByPostIdUserId(int postId, int userId) {
+		return postMapper.selectPostByPostIdUserId(postId, userId);
 	}
 	
 	public int addContent(int userId, String content, MultipartFile file) {
@@ -49,24 +49,23 @@ public class PostBO {
 		return postMapper.selectPostListByUserId(userId);
 	}
 	
-	public int deletePost(int postId, int userId) {
+	
+	public void deletePostByPostIdUserId(int postId, int userId) {
 		// 글을 삭제할 때 이미지 ,내용, 좋아요, 댓글을 모두 삭제해주어야 한다.
 		
 		// 해당 글을 포스트 아이디로 가져온다.
-		Post post = getPostByPostId(postId);
-		
+		Post post = getPostByPostIdUserId(postId, userId);
+
 		// 이미지 삭제
 		fileManager.deleteFile(post.getImagePath());
 		
 		// 댓글 삭제
-		commentBO.deleteComment(postId, userId);
+		commentBO.deleteCommentBypostId(postId);
 		
 		// 좋아요 삭제
-		likeBO.deleteLike(postId, userId);
+		likeBO.deleteLikeByPostId(postId);
 		
 		// 내용 삭제
-		
-		
-		return 
-	}
+		postMapper.deletePostByPostIdUserId(postId, userId);
+		}
 }

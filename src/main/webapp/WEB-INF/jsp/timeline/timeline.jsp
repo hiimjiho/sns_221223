@@ -308,7 +308,7 @@
 			let postId = $(this).data("post-id");
 			//alert(postId);
 			// 모달 태그에(재활용 되고 있는) data-post-id를 심어줌
-			${"#modal"}.data('post-id', postId); // setting
+			$("#modal").data('post-id', postId); // setting
 			
 		});
 		// 모달 안에 있는 삭제하기 버튼 클릭
@@ -316,11 +316,27 @@
 			e.preventDefault();
 			
 			let postId = $("#modal").data("post-id");
-			alert(postId);
+			//alert(postId);
 			
 			// ajax 글 삭제
 			$.ajax({
+				type:"delete"
+				, url:"/post/delete"
+				, data:{
+					"postId" : postId
+				}
 				
+				, success: function(data){
+					if(data.code == 1){
+						alert("글을 삭제하였습니다.");
+						location.reload(true);
+					} else{
+						alert(errorMessage);
+					}
+				}
+					, error: function(request, status, error){
+						alert("게시글 삭제에 실패했습니다.");
+					}
 			});
 		});
 	});
