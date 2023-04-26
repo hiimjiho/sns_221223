@@ -10,7 +10,7 @@
 	<%-- 로그인 정보 --%>
 	<div>
 		<c:if test="${not empty userId}">
-			<span><a href="/user/profile_view">${userName}</a>님 안녕하세요</span>
+			<span><a href="/user/profile_view?userId=${userName}">${userName}</a>님 안녕하세요</span>
 			<a href="/user/sign_out" class="font-weight-bold">로그아웃</a>
 		</c:if> 
 		<c:if test="${empty userId}">

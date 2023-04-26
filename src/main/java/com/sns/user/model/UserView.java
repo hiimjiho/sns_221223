@@ -8,7 +8,6 @@ public class UserView {
 	
 	private Post post;
 	
-	
 	public User getUser() {
 		return user;
 	}

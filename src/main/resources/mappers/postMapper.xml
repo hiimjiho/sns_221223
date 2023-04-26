@@ -80,4 +80,18 @@
  		AND
  			`userId` = #{userId}
  	</delete>
+ 	
+ 	<select id="selectPost" resultType="com.sns.post.model.Post">
+ 		SELECT
+ 			`id`
+ 			, `userId`
+ 			, `content`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`post`
+ 		WHERE
+ 			`userId` = #{userId}
+ 	</select>
  </mapper>

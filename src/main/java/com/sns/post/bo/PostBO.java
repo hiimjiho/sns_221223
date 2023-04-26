@@ -68,4 +68,9 @@ public class PostBO {
 		// 내용 삭제
 		postMapper.deletePostByPostIdUserId(postId, userId);
 		}
+	
+	public Post getPost(int userId) {
+		return postMapper.selectPost(userId);
+	}
+	
 }

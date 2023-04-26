@@ -24,4 +24,6 @@ public interface UserMapper {
 	public User selectUserById(int id);
 	
 	public List<User> selectUserList();
+	
+	public User selectUserByUserId(int userId);
 }

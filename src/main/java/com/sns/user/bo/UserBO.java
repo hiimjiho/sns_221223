@@ -47,17 +47,29 @@ public class UserBO {
 		return postBO.getPostList();
 	}
 	
-//	public List<UserView> generateProfileList(){
-//		List<UserView> profile = new ArrayList<>();
-//		
-//		List<User> userList = getUserList();
-//		
-//		for(User user : userList) {
-//			UserView userView = new UserView();
-//			
-//			userView.getUser();
-//		}
-//		
-//	}
+	public void getUserByUserId(int userId) {
+		userMapper.selectUserByUserId(userId);
+	}
+	
+	public List<UserView> getProfile() {
+		
+		List<UserView> getProfile = new ArrayList<>();
+		
+		List<User> userList = userMapper.selectUserList();
+		
+		
+		
+		for(User user : userList) {
+			UserView userProfile = new UserView();
+			userProfile.setUser(user);
+			
+			Post post = postBO.getPost(post.getUserId());
+		
+		}
+		
+		return getProfile;
+		
+		
+	}
 	
 }
