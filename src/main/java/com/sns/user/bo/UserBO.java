@@ -1,6 +1,5 @@
 package com.sns.user.bo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,6 @@ public class UserBO {
 	@Autowired
 	private UserMapper userMapper;
 	
-	private User user;
-	
-	private Post post;
 	
 	private PostBO postBO;
 	
@@ -51,24 +47,18 @@ public class UserBO {
 		userMapper.selectUserByUserId(userId);
 	}
 	
-	public List<UserView> getProfile() {
+	public UserView generateProfile(int userId, String loginId) {
 		
-		List<UserView> getProfile = new ArrayList<>();
+		UserView userView = new UserView();
 		
-		List<User> userList = userMapper.selectUserList();
+		User user = userMapper.selectUserByLoginId(loginId);
 		
+		List<Post> postList = postBO.getPostListByUserId(userId);
 		
+		userView.setPostList(postList);
+		userView.setUser(user);
 		
-		for(User user : userList) {
-			UserView userProfile = new UserView();
-			userProfile.setUser(user);
-			
-			Post post = postBO.getPost(post.getUserId());
-		
-		}
-		
-		return getProfile;
-		
+		return userView;
 		
 	}
 	

@@ -9,7 +9,7 @@
 		<img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="프로필" width=100 height=100 class="profileImage">
 	</div>
 	<div class="profileLoginId">
-			<span class="font-weight-bold">loginId</span>
+			<span class="font-weight-bold"></span>
 	</div>
 	<div class="profileCorrectionBtn">
 		<a href="#" class="btn btn-success">프로필 수정</a>

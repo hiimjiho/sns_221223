@@ -1,12 +1,14 @@
 package com.sns.user.model;
 
+import java.util.List;
+
 import com.sns.post.model.Post;
 
 public class UserView {
 	
 	private User user;
 	
-	private Post post;
+	private List<Post> postList;
 	
 	public User getUser() {
 		return user;
@@ -16,13 +18,15 @@ public class UserView {
 		this.user = user;
 	}
 
-	public Post getPost() {
-		return post;
+	public List<Post> getPostList() {
+		return postList;
 	}
 
-	public void setPost(Post post) {
-		this.post = post;
+	public void setPostList(List<Post> postList) {
+		this.postList = postList;
 	}
+
+
 
 	
 	

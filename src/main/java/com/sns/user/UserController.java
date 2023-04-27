@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sns.post.bo.PostBO;
 import com.sns.post.model.Post;
+import com.sns.user.bo.UserBO;
+import com.sns.user.model.UserView;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -18,6 +20,8 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
 	@Autowired
 	private PostBO postBO;
+	
+	private UserBO userBO;
 	
 	@GetMapping("/sign_up_view")
 	public String signUpView(Model model) {
@@ -48,11 +52,15 @@ public class UserController {
 			HttpSession session) {
 		
 		Integer userId = (Integer)session.getAttribute("userId");
+		String loginId = (String)session.getAttribute("loginId");
 		
 		// TODO null 체크 해주어야 함.
 		
 		List<Post> postList = postBO.getPostListByUserId(userId);
 		model.addAttribute("postList", postList);
+		
+		UserView userView = userBO.generateProfile(userId, loginId);
+		model.addAttribute("userView", userView);
 		model.addAttribute("view", "user/profile");
 		return "template/layout";
 	}
