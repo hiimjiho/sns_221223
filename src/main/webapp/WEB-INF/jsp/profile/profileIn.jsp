@@ -9,7 +9,7 @@
 		<img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="프로필" width=100 height=100 class="profileImage">
 	</div>
 	<div class="profileLoginId">
-			<span class="font-weight-bold"></span>
+			<span class="font-weight-bold">${userView.user.loginId}</span>
 	</div>
 	<div class="profileCorrectionBtn">
 		<a href="#" class="btn btn-success">프로필 수정</a>
@@ -17,9 +17,7 @@
 </div>
 
 <div class="d-flex">
-	<c:forEach items="${postList}" var="post">
-	<div class="postList">
-		<img src="${post.imagePath}" width=200 height=300>
+	<div class="postListView">
+		<img src="${userView.postList}" width=200 height=300>
 	</div>
-	</c:forEach>
 </div>

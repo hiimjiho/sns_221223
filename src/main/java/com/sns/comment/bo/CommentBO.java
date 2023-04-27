@@ -17,7 +17,8 @@ public class CommentBO {
 	@Autowired
 	private CommentMapper commentMapper;
 	
-	@Autowired UserBO userBO;
+	@Autowired
+	private UserBO userBO;
 	
 	public int addComment(String content, int userId, int postId) {
 		return commentMapper.insertComment(content, userId, postId);

@@ -58,14 +58,18 @@
 					<a href="#" class="like-btn" data-post-id="${card.post.id}">
 						<img src="https://cdn.pixabay.com/photo/2016/01/20/14/22/heart-1151623_960_720.png" width="18px" height="18px" alt="filled heart">
 					</a>
+					<a href="#" class="likeUser" data-toggle="likeModal" data-target="#likeModal">
 					좋아요 ${card.likeCount}개
+					</a>
 				</c:if>
 				<%--좋아요가 눌려졌을 때 (채워진 하트) --%>
 					<c:if test="${card.filledLike}">
 					<a href="#" class="like-btn" data-post-id="${card.post.id}">
 						<img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="18px" height="18px" alt="filled heart">
 					</a>
+					<a href="#" class="likeUser" data-toggle="likeModal" data-target="#likeModal">
 					좋아요 ${card.likeCount}개
+					</a>
 				</c:if>
 				</div>
 				
@@ -129,6 +133,23 @@
      	<div class="py-3">
      		<%-- data-dismiss="modal" => 모달창 닫힘 --%>
      		<a href="#" data-dismiss="modal">취소하기</a>
+     	</div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="likeModal">
+	<!-- modal-dialog-centered: 모달 창을 수직 가운데 정렬 -->
+	<%--modal-sm 작은 모달. --%>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content text-center">
+    	<div class="py-3 border-bottom">
+     		
+     	</div>
+     	<div class="py-3">
+     		<%-- data-dismiss="modal" => 모달창 닫힘 --%>
+     		
      	</div>
     </div>
   </div>

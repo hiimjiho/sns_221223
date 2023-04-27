@@ -45,12 +45,7 @@
  	</delete>
  	<select id="selectPostListByUserId" resultType="com.sns.post.model.Post" parameterType="int">
  		SELECT
- 			`id`
- 			, `userId`
- 			, `content`
- 			, `imagePath`
- 			, `createdAt`
- 			, `updatedAt`
+ 			`imagePath`
  		FROM
  			`post`
  		WHERE
