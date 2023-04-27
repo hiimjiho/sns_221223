@@ -11,13 +11,18 @@
 	<div class="profileLoginId">
 			<span class="font-weight-bold">${userView.user.loginId}</span>
 	</div>
+	<div class="profileEmail">
+			<span class="font-weight-bold">${userView.user.email}</span>
+	</div>
 	<div class="profileCorrectionBtn">
 		<a href="#" class="btn btn-success">프로필 수정</a>
 	</div>
 </div>
 
 <div class="d-flex">
+	<c:forEach items="${userView.postList}" var="postList">
 	<div class="postListView">
-		<img src="${userView.postList}" width=200 height=300>
+		<img src="${postList.imagePath}" width=200 height=300>
 	</div>
+	</c:forEach>
 </div>
